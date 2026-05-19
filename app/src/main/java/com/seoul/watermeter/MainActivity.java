@@ -212,18 +212,16 @@ public class MainActivity extends AppCompatActivity {
                     System.arraycopy(buf, 0, acc, accLen[0], n);
                     accLen[0] += n;
 
-                    // 수신 바이트 한 줄 로그
-                    StringBuilder hex = new StringBuilder();
-                    for (int i = 0; i < n; i++)
-                        hex.append(String.format("%02X ", buf[i] & 0xFF));
-                    addLog("← " + n + "B: " + hex.toString().trim(), "HEX");
-
                     int end = MeterProtocol.findLongFrameEnd(acc, accLen[0]);
                     if (end > 0) {
                         byte[] frame = new byte[end];
                         System.arraycopy(acc, 0, frame, 0, end);
                         accLen[0] -= end;
                         System.arraycopy(acc, end, acc, 0, accLen[0]);
+
+                        // 완성된 프레임 한 줄 로그
+                        addLog("← " + end + "B: " + MeterProtocol.toHex(frame), "HEX");
+
                         MeterProtocol.ParseResult r =
                             MeterProtocol.parseLongFrame(frame);
                         mainHandler.post(() -> handleResult(r));
