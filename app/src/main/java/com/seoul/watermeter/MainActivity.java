@@ -209,15 +209,14 @@ public class MainActivity extends AppCompatActivity {
             try {
                 int n = serialPort.read(buf, 200);
                 if (n > 0) {
-                    addLog("← 수신 " + n + "바이트", "HEX");
                     System.arraycopy(buf, 0, acc, accLen[0], n);
                     accLen[0] += n;
 
-                    // 수신 HEX 로그
+                    // 수신 바이트 한 줄 로그
                     StringBuilder hex = new StringBuilder();
                     for (int i = 0; i < n; i++)
                         hex.append(String.format("%02X ", buf[i] & 0xFF));
-                    addLog("HEX: " + hex.toString().trim(), "HEX");
+                    addLog("← " + n + "B: " + hex.toString().trim(), "HEX");
 
                     int end = MeterProtocol.findLongFrameEnd(acc, accLen[0]);
                     if (end > 0) {
