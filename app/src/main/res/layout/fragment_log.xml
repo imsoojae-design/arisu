@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:background="@color/bg">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="52dp"
+        android:orientation="horizontal" android:gravity="center_vertical"
+        android:paddingStart="16dp" android:paddingEnd="16dp">
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:text="시스템 로그"
+            android:textSize="13sp" android:textColor="@color/muted"/>
+        <Button android:id="@+id/btnClearLog"
+            android:layout_width="wrap_content" android:layout_height="36dp"
+            android:text="지우기" android:textColor="@color/text_color"
+            android:backgroundTint="@color/panel" android:textSize="12sp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+    </LinearLayout>
+    <ScrollView android:id="@+id/scrollLog"
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:padding="12dp" android:background="@color/bg2">
+        <TextView android:id="@+id/tvLog"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:textSize="11sp" android:fontFamily="monospace"
+            android:textColor="@color/muted" android:lineSpacingMultiplier="1.7"/>
+    </ScrollView>
+</LinearLayout>
